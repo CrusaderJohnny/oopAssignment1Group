@@ -4,6 +4,7 @@ import java.util.Comparator;
 
 import shapes.BaseAreaCompare;
 import shapes.Shapes;
+import shapes.VolumeCompare;
 
 public class SortManager {
 
@@ -43,6 +44,81 @@ public class SortManager {
 				break;
 			}
 		}
+	}
+
+	public static void insertionSort(Shapes[] shapes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void selectionSort(Shapes[] shapes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void mergeSort(Shapes[] shapes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void quickSort(Shapes[] shapes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void heapSort(Shapes[] shapes) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void insertionSort(Shapes[] shapes, BaseAreaCompare bac) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void selectionSort(Shapes[] shapes, BaseAreaCompare bac) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public static void mergeSort(Shapes[] shapes, BaseAreaCompare bac) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void quickSort(Shapes[] shapes, BaseAreaCompare bac) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void heapSort(Shapes[] shapes, BaseAreaCompare bac) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void insertionSort(Shapes[] shapes, VolumeCompare vc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void selectionSort(Shapes[] shapes, VolumeCompare vc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void mergeSort(Shapes[] shapes, VolumeCompare vc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void quickSort(Shapes[] shapes, VolumeCompare vc) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void heapSort(Shapes[] shapes, VolumeCompare vc) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
