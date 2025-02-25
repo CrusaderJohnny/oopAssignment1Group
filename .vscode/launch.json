@@ -1,0 +1,31 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "Run AppDriver (No Args)",
+            "mainClass": "appDomain.AppDriver",
+            "projectName": "assignment1StartingCode",
+            "preLaunchTask": "Build JAR File"
+        },
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "Build Jar",
+            "mainClass": "appDomain.AppDriver",  
+            "args": "-fshapes1.txt -th -sb",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "Build JAR File"
+        },
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "Debug Java Program with Args",
+            "mainClass": "appDomain.AppDriver",
+            "args": "-fshapes3.txt -th -sb",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+        }
+    ]
+}

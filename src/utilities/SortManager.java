@@ -1,6 +1,8 @@
 package utilities;
 
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Random;
 
 import shapes.BaseAreaCompare;
 import shapes.Shapes;
@@ -8,117 +10,198 @@ import shapes.VolumeCompare;
 
 public class SortManager {
 
-	public static <T extends Comparable<T>>void bubbleSort(T[] arr) {
-		boolean swap;
-		for (int i = 0; i < arr.length - 1; i++) {
-			swap = false;
-			for(int k = 0; k < arr.length - i - 1; k++) {
-				if(arr[k].compareTo(arr[k + 1]) > 0) {
-					T hold = arr[k];
-					arr[k] = arr[k+1];
-					arr[k+1] = hold;
-					swap = true;
+
+	public static void bubbleSort(Shapes[] shapes, Comparator<Shapes> comparator) {
+		long start = System.currentTimeMillis();
+		Integer n = shapes.length;
+
+		for (Integer i = 0; i < n - 1; i++) {
+			boolean swapped = false;
+			
+			for (Integer j = 0; j < n - i - 1; j++) {
+				if (comparator.compare(shapes[j], shapes[j + 1]) > 0) {
+
+					Shapes temp = shapes[j];
+					shapes[j] = shapes[j + 1];
+					shapes[j + 1] = temp;
+					swapped = true;
 				}
 			}
-			//no swaps in inner loop, break out 
-			if(swap = false) {
+
+			if (!swapped)
 				break;
-			}
 		}
+
+		long end = System.currentTimeMillis();
+		System.out.println("-------------------------------------------------Time taken by Bubble sort is " + (end - start) + " millis");
 	}
 
-	public static <T> void bubbleSort(T[] arr, Comparator<T> c) {
-		boolean swap;
-		for (int i = 0; i < arr.length - 1; i++) {
-			swap = false;
-			for(int k = 0; k < arr.length - i - 1; k++) {
-				if(c.compare(arr[k], arr[k+1])> 0) {
-					T hold = arr[k];
-					arr[k] = arr[k+1];
-					arr[k+1] = hold;
-					swap = true;
-				}
+	public static void insertionSort(Shapes[] shapes, Comparator<Shapes> comparator) {
+		long start = System.currentTimeMillis();
+		int n = shapes.length;
+	
+		for (int i = 1; i < n; i++) {
+			Shapes key = shapes[i];  
+			
+			int j = i - 1;
+	
+			if (i % 10000 == 0) {
+				System.out.println(i + " elements sorted, time: " + (System.currentTimeMillis() - start) + " ms");
 			}
-			//no swaps in inner loop, break out 
-			if(swap = false) {
-				break;
+			while (j >= 0 && comparator.compare(shapes[j], key) > 0) {
+				shapes[j + 1] = shapes[j];
+				j--;
 			}
+			shapes[j + 1] = key;  
+			
+	
+			
 		}
-	}
-
-	public static void insertionSort(Shapes[] shapes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void selectionSort(Shapes[] shapes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void mergeSort(Shapes[] shapes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void quickSort(Shapes[] shapes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void heapSort(Shapes[] shapes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void insertionSort(Shapes[] shapes, BaseAreaCompare bac) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void selectionSort(Shapes[] shapes, BaseAreaCompare bac) {
-		// TODO Auto-generated method stub
-		
+	
+		long end = System.currentTimeMillis();
+		System.out.println("-------------------------------------------------Time taken by Insertion Sort: " + (end - start) + " ms");
 	}
 	
-	public static void mergeSort(Shapes[] shapes, BaseAreaCompare bac) {
-		// TODO Auto-generated method stub
-		
+	public static void selectionSort(Shapes[] shapes, Comparator<Shapes> comparator) {
+		long start = System.currentTimeMillis();
+		int n = shapes.length;
+	
+		for (int i = 0; i < n - 1; i++) {
+			int minIndex = i;
+	
+			for (int j = i + 1; j < n; j++) {
+				if (comparator.compare(shapes[j], shapes[minIndex]) > 0) {
+					minIndex = j;
+				}
+			}
+	
+			Shapes temp = shapes[minIndex];
+			shapes[minIndex] = shapes[i];
+			shapes[i] = temp;
+	
+			
+		}
+	
+		long end = System.currentTimeMillis();
+		System.out.println("-------------------------------------------------Time taken by Selection Sort: " + (end - start) + " ms");
 	}
 
-	public static void quickSort(Shapes[] shapes, BaseAreaCompare bac) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	public static void heapSort(Shapes[] shapes, BaseAreaCompare bac) {
-		// TODO Auto-generated method stub
-		
+	public static void mergeSort(Shapes[] shapes, Comparator<Shapes> comparator) {
+		long start = System.currentTimeMillis();
+		mergeSortRecursive(shapes, 0, shapes.length - 1, comparator);
+		long end = System.currentTimeMillis();
+		System.out.println("-------------------------------------------------Time taken by Merge Sort: " + (end - start) + " ms");
 	}
-
-	public static void insertionSort(Shapes[] shapes, VolumeCompare vc) {
-		// TODO Auto-generated method stub
-		
+	
+	private static void mergeSortRecursive(Shapes[] shapes, int left, int right, Comparator<Shapes> comparator) {
+		if (left < right) {
+			int mid = left + (right - left) / 2;
+	
+			// Recursively sort first and second halves
+			mergeSortRecursive(shapes, left, mid, comparator);
+			mergeSortRecursive(shapes, mid + 1, right, comparator);
+	
+			// Merge the sorted halves
+			merge(shapes, left, mid, right, comparator);
+		}
 	}
-
-	public static void selectionSort(Shapes[] shapes, VolumeCompare vc) {
-		// TODO Auto-generated method stub
-		
+	
+	private static void merge(Shapes[] shapes, int left, int mid, int right, Comparator<Shapes> comparator) {
+		int n1 = mid - left + 1;
+		int n2 = right - mid;
+	
+		// Create temporary arrays
+		Shapes[] leftArray = new Shapes[n1];
+		Shapes[] rightArray = new Shapes[n2];
+	
+		// Copy data to temp arrays
+		System.arraycopy(shapes, left, leftArray, 0, n1);
+		System.arraycopy(shapes, mid + 1, rightArray, 0, n2);
+	
+		int i = 0, j = 0, k = left;
+	
+		// Merge the temp arrays back into the main array
+		while (i < n1 && j < n2) {
+			if (comparator.compare(leftArray[i], rightArray[j]) <= 0) {
+				shapes[k] = leftArray[i];
+				i++;
+			} else {
+				shapes[k] = rightArray[j];
+				j++;
+			}
+			k++;
+		}
+	
+		// Copy remaining elements of leftArray[], if any
+		while (i < n1) {
+			shapes[k] = leftArray[i];
+			i++;
+			k++;
+		}
+	
+		// Copy remaining elements of rightArray[], if any
+		while (j < n2) {
+			shapes[k] = rightArray[j];
+			j++;
+			k++;
+		}
 	}
+	
+public static void quickSort(Shapes[] shapes, Comparator<Shapes> comparator) {
+        long start = System.currentTimeMillis();
 
-	public static void mergeSort(Shapes[] shapes, VolumeCompare vc) {
-		// TODO Auto-generated method stub
-		
-	}
+        quickSortHelper(shapes, 0, shapes.length - 1, comparator);
 
-	public static void quickSort(Shapes[] shapes, VolumeCompare vc) {
-		// TODO Auto-generated method stub
-		
-	}
+        long end = System.currentTimeMillis();
+        System.out.println("-------------------------------------------------Time taken by Quick Sort: " + (end - start) + " ms");
+    }
 
-	public static void heapSort(Shapes[] shapes, VolumeCompare vc) {
-		// TODO Auto-generated method stub
-		
-	}
+    private static void quickSortHelper(Shapes[] shapes, int low, int high, Comparator<Shapes> comparator) {
+        if (low < high) {
+            int pivotIndex = randomizedPartition(shapes, low, high, comparator);
+            
+         
+            quickSortHelper(shapes, low, pivotIndex - 1, comparator);
+            quickSortHelper(shapes, pivotIndex + 1, high, comparator);
+        }
+    }
 
+    private static int randomizedPartition(Shapes[] shapes, int low, int high, Comparator<Shapes> comparator) {
+        Random rand = new Random();
+        int randomPivotIndex = low + rand.nextInt(high - low + 1);
+        swap(shapes, randomPivotIndex, high); // Move random pivot to end
+        
+        return partition(shapes, low, high, comparator);
+    }
+
+    private static int partition(Shapes[] shapes, int low, int high, Comparator<Shapes> comparator) {
+        Shapes pivot = shapes[high];
+        int i = low - 1;
+
+        for (int j = low; j < high; j++) {
+            if (comparator.compare(shapes[j], pivot) <= 0) {
+                i++;
+                swap(shapes, i, j);
+            }
+        }
+
+        swap(shapes, i + 1, high);
+        return i + 1;
+    }
+
+    private static void swap(Shapes[] shapes, int i, int j) {
+        Shapes temp = shapes[i];
+        shapes[i] = shapes[j];
+        shapes[j] = temp;
+    }
+
+	 public static void timSort(Shapes[] shapes, Comparator<Shapes> comparator) {
+        long start = System.currentTimeMillis();
+        
+        Arrays.sort(shapes, comparator.reversed());
+
+        long end = System.currentTimeMillis();
+        System.out.println("Time taken by TimSort (Arrays.sort()): " + (end - start) + " ms");
+    }
 }
