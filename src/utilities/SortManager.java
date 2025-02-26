@@ -45,80 +45,43 @@ public class SortManager {
 			}
 		}
 	}
-
-	public static void insertionSort(Shapes[] shapes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void selectionSort(Shapes[] shapes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void mergeSort(Shapes[] shapes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void quickSort(Shapes[] shapes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void heapSort(Shapes[] shapes) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void insertionSort(Shapes[] shapes, BaseAreaCompare bac) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void selectionSort(Shapes[] shapes, BaseAreaCompare bac) {
-		// TODO Auto-generated method stub
-		
+	public static <T extends Comparable<T>> void insertionSort(T[] arr) {
+		//to do
 	}
 	
-	public static void mergeSort(Shapes[] shapes, BaseAreaCompare bac) {
-		// TODO Auto-generated method stub
-		
+	public static <T> void insertionSort(T[] arr, Comparator<T> c) {
+		// to do
 	}
-
-	public static void quickSort(Shapes[] shapes, BaseAreaCompare bac) {
-		// TODO Auto-generated method stub
-		
+	
+	public static <T extends Comparable<T>> void selectionSort(T[] arr) {
+		// to do
 	}
-
-	public static void heapSort(Shapes[] shapes, BaseAreaCompare bac) {
-		// TODO Auto-generated method stub
-		
+	
+	public static <T> void selectionSort(T[] arr, Comparator<T> c) {
+		// to do
 	}
-
-	public static void insertionSort(Shapes[] shapes, VolumeCompare vc) {
-		// TODO Auto-generated method stub
-		
+	
+	public static <T extends Comparable<T>> void mergeSort(T[] arr) {
+		// to do
 	}
-
-	public static void selectionSort(Shapes[] shapes, VolumeCompare vc) {
-		// TODO Auto-generated method stub
-		
+	
+	public static <T> void mergeSort(T[] arr, Comparator<T> c) {
+		// to do
 	}
-
-	public static void mergeSort(Shapes[] shapes, VolumeCompare vc) {
-		// TODO Auto-generated method stub
-		
+	
+	public static <T extends Comparable<T>> void quickSort(T[] arr) {
+		// to do
 	}
-
-	public static void quickSort(Shapes[] shapes, VolumeCompare vc) {
-		// TODO Auto-generated method stub
-		
+	
+	public static <T> void quickSort(T[] arr, Comparator<T> c) {
+		// to do
 	}
-
-	public static void heapSort(Shapes[] shapes, VolumeCompare vc) {
-		// TODO Auto-generated method stub
-		
+	
+	public static <T extends Comparable<T>> void heapSort(T[] arr) {
+		// to do
 	}
-
+	
+	public static <T> void heapSort(T[] arr, Comparator<T> c) {
+		// to do
+	}
 }
