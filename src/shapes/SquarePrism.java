@@ -5,7 +5,6 @@ public final class SquarePrism extends Prisms
 
 	public SquarePrism(double height, double side) {
 		super(height, side);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -16,7 +15,8 @@ public final class SquarePrism extends Prisms
 	@Override
 	public String toString() {
 		return "Square Prism with height: " + getHeight() + "\nSides: " 
-				+getSide() + "\nHas a base area: " +calcBaseArea()+ "\nVolume: " +calcVolume();
+				+getSide() + "\nHas a base area: " +String.format("%.2f", calcBaseArea())+
+				"\nVolume: " +String.format("%.2f", calcVolume())+ "\n";
 	}
 
 }

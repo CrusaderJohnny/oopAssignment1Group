@@ -1,6 +1,7 @@
 package manager;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 import shapes.BaseAreaCompare;
@@ -49,7 +50,12 @@ public class PacMan {
 		System.out.println(compareType);
 		System.out.println(sortType);
 		loadShapesFromFile(fileName);
+		long start = System.currentTimeMillis();
 		sortShapesFromFile();
+		long stop = System.currentTimeMillis();
+		long timeElapsed = stop - start;
+		System.out.println(timeElapsed);
+		
 	}
 	
 	/**
@@ -137,6 +143,7 @@ public class PacMan {
 
 	private void loadShapesFromFile(String file) {
 		File loadFile = new File("res/"+file);
+		int index = 0;
 
 		try {
 			newFile = new Scanner(loadFile);
@@ -173,19 +180,12 @@ public class PacMan {
 			case "triangularprism":
 				s = new TriangularPrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
 				break;
-			case "10":
-				destinedLength = Integer.parseInt(shapeID);
-				break;
-			case "1000":
-				destinedLength = Integer.parseInt(shapeID);
-				break;
-			case "1000000":
-				destinedLength = Integer.parseInt(shapeID);
-				break;
 			default:
 				System.out.println("No shape ID found");
 				break;
 			}
+			shapes[index] = s;
+			index++;
 		}	
 	}	
 }
