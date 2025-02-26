@@ -2,6 +2,13 @@ package shapes;
 
 import java.util.Comparator;
 
+/**
+ * Volume compare class
+ * takes the volume of two shape objects when the compare function is called
+ * returns negative value if object 1 is greater than object 2
+ * Allows sorting of array in descending order this way
+ */
+
 public class VolumeCompare implements Comparator<Shapes> {
 
 	@Override

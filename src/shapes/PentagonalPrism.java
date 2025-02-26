@@ -1,8 +1,17 @@
 package shapes;
 
+/**
+ * Class to represent a Pentagonal Prism
+ */
+
 public class PentagonalPrism extends Prisms
 {
 
+	/**
+	 * Creates a Pentagonal Prism Shape object
+	 * @param height height of Pentagonal Prism
+	 * @param side side length of Pentagonal Prism
+	 */
 	public PentagonalPrism(double height, double side) {
 		super(height, side);
 	}

@@ -1,10 +1,14 @@
 package shapes;
 
+/**
+ * Class to represent the Cone Shape
+ */
 public class Cone extends Shapes
 {
-	private double rads;
-	
-	
+	/**
+	 * Radius attribute of Cone Shape
+	 */
+	private double rads;	
 
 	/**
 	 * Constructor for cone shape extending from shape class adds height from super and radius
@@ -25,7 +29,11 @@ public class Cone extends Shapes
 	public double calcVolume() {
 		return calcBaseArea() * getHeight() / 3;
 	}
-
+	
+	/**
+	 * Get object radius 
+	 * @return radius
+	 */
 	public double getRads() {
 		return rads;
 	}

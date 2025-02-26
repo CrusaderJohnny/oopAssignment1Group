@@ -15,6 +15,7 @@ public abstract class Shapes implements Comparable<Shapes> {
 		super();
 		this.height = height;
 	}
+	
 	/**
 	 * Gets the height of the shape object
 	 * @return height of object
