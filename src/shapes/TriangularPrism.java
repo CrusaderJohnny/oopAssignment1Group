@@ -5,13 +5,11 @@ public class TriangularPrism extends Prisms
 
 	public TriangularPrism(double height, double side) {
 		super(height, side);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public double calcBaseArea() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (Math.pow(getSide(), 2) * Math.sqrt(3)) / 4;
 	}
 	
 	@Override

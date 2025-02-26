@@ -5,13 +5,11 @@ public class OctagonalPrism extends Prisms
 
 	public OctagonalPrism(double height, double side) {
 		super(height, side);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public double calcBaseArea() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 2 * (1 + Math.sqrt(2)) * Math.pow(getSide(), 2);
 	}
 	@Override
 	public String toString() {

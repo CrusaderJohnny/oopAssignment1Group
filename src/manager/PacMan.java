@@ -8,7 +8,6 @@ import java.util.Scanner;
 import shapes.BaseAreaCompare;
 import shapes.Cone;
 import shapes.Cylinder;
-import shapes.HeightCompare;
 import shapes.OctagonalPrism;
 import shapes.PentagonalPrism;
 import shapes.Pyramid;
@@ -25,8 +24,8 @@ public class PacMan {
 	private char compareType;
 	private char sortType;
 	private Shapes[] shapes;
-	private Scanner input;
-	private File file;
+	//private Scanner input;
+	//private File file;
 	private Scanner newFile;
 	private int destinedLength;
 	private Comparator<Shapes> comparator = null;
@@ -43,10 +42,10 @@ public class PacMan {
 			if (s.startsWith("-f") || s.startsWith("-F")) {
 				fileName = s.substring(2);
 			} else if (s.startsWith("-t") || s.startsWith("-T")) {
-				compareType = s.substring(2).charAt(0);
+				compareType = Character.toLowerCase(s.substring(2).charAt(0));
 				switch (compareType) {
 					case 'h':
-						comparator = new HeightCompare();
+						comparator = null;
 						break;
 					case 'v':
 						comparator = new VolumeCompare();
@@ -55,7 +54,9 @@ public class PacMan {
 						comparator = new BaseAreaCompare();
 						break;
 				}
-				comparator = comparator.reversed();
+
+				comparator = (comparator != null) ? comparator.reversed() : null;
+
 			} else if (s.startsWith("-s") || s.startsWith("-S")) {
 				sortType = s.substring(2).charAt(0);
 			}
@@ -73,11 +74,7 @@ public class PacMan {
 
 	private void sortShapesFromFile() {
 
-		for (int i = 0; i < shapes.length; i++) {
-			if (i == 0 || i == shapes.length - 1 || (shapes.length > 1000 && i % 1000 == 0)) {
-				System.out.println("Index " + i + ": " + shapes[i] + "\n");
-			}
-		}
+		SortManager.printResult(shapes, compareType);
 
 		sortType = Character.toUpperCase(sortType);
 
@@ -111,11 +108,7 @@ public class PacMan {
 				break;
 		}
 
-		for (int i = 0; i < shapes.length; i++) {
-			if (i == 0 || i == shapes.length - 1 || (shapes.length > 1000 && i % 1000 == 0)) {
-				System.out.println("Index " + i + ": " + shapes[i] + "\n");
-			}
-		}
+		SortManager.printResult(shapes, compareType);
 
 
 	}

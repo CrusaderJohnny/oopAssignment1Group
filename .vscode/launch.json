@@ -23,9 +23,11 @@
             "request": "launch",
             "name": "Debug Java Program with Args",
             "mainClass": "appDomain.AppDriver",
-            "args": "-fshapes3.txt -th -sb",
+            "args": "-fshapes3.txt -th -sq",
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
         }
     ]
 }
+//-t H V A
+//-s B I S M Q 
