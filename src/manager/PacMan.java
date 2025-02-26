@@ -143,6 +143,9 @@ public class PacMan {
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
+		String length = newFile.nextLine();
+		destinedLength = Integer.parseInt(length);
+		shapes = new Shapes[destinedLength];
 		while(newFile.hasNext()) {
 			String line = newFile.nextLine();
 			String[] fields = line.split(" ");
@@ -183,8 +186,6 @@ public class PacMan {
 				System.out.println("No shape ID found");
 				break;
 			}
-		}
-	
-	}
-	
+		}	
+	}	
 }
