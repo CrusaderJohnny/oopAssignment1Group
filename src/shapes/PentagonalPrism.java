@@ -5,13 +5,12 @@ public class PentagonalPrism extends Prisms
 
 	public PentagonalPrism(double height, double side) {
 		super(height, side);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public double calcBaseArea() {
-		// TODO Auto-generated method stub
-		return 0;
+		return (5 * Math.pow(getSide(), 2)) / (4 * Math.tan(Math.toRadians(54)));
+
 	}
 	
 	@Override

@@ -1,6 +1,8 @@
 package manager;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Comparator;
 import java.util.Scanner;
 
 import shapes.BaseAreaCompare;
@@ -16,32 +18,46 @@ import shapes.VolumeCompare;
 import utilities.SortManager;
 
 public class PacMan {
-	
-	//attribute
+
+	// attribute
 	private String fileName;
 	private char compareType;
 	private char sortType;
 	private Shapes[] shapes;
-	private Scanner input;
-	private File file;
-	private	Scanner newFile;
+	//private Scanner input;
+	//private File file;
+	private Scanner newFile;
 	private int destinedLength;
-	
+	private Comparator<Shapes> comparator = null;
+
 	/**
 	 * Creates class with args
+	 * 
 	 * @param args
 	 */
 
 	public PacMan(String[] args) {
-		for(String s : args) {
+		for (String s : args) {
 			System.out.println(s);
-			if(s.startsWith("-f") || s.startsWith("-F")) {
+			if (s.startsWith("-f") || s.startsWith("-F")) {
 				fileName = s.substring(2);
-			}
-			else if(s.startsWith("-t") || s.startsWith("-T")) {
-				compareType = s.substring(2).charAt(0);
-			}
-			else if(s.startsWith("-s") || s.startsWith("-S")) {
+			} else if (s.startsWith("-t") || s.startsWith("-T")) {
+				compareType = Character.toLowerCase(s.substring(2).charAt(0));
+				switch (compareType) {
+					case 'h':
+						comparator = null;
+						break;
+					case 'v':
+						comparator = new VolumeCompare();
+						break;
+					case 'a':
+						comparator = new BaseAreaCompare();
+						break;
+				}
+
+				comparator = (comparator != null) ? comparator.reversed() : null;
+
+			} else if (s.startsWith("-s") || s.startsWith("-S")) {
 				sortType = s.substring(2).charAt(0);
 			}
 		}
@@ -51,140 +67,107 @@ public class PacMan {
 		loadShapesFromFile(fileName);
 		sortShapesFromFile();
 	}
-	
+
 	/**
 	 * Sorts the shapes array
 	 */
 
 	private void sortShapesFromFile() {
-		if(compareType == 'h' || compareType == 'H') {
-			if(sortType == 'b' || sortType == 'B') {
-				SortManager.bubbleSort(shapes);
-			}
-			else if(sortType == 'i' || sortType == 'I') {
-				SortManager.insertionSort(shapes);
-			}
-			else if(sortType == 's' || sortType == 'S') {
-				SortManager.selectionSort(shapes);
-			}
-			else if(sortType == 'm' || sortType == 'm') {
-				SortManager.mergeSort(shapes);
-			}
-			else if(sortType == 'q' || sortType == 'Q') {
-				SortManager.quickSort(shapes);
-			}
-			else if(sortType == 'h' || sortType == 'H') {
-				SortManager.heapSort(shapes);
-			}
+
+		SortManager.printResult(shapes, compareType);
+
+		sortType = Character.toUpperCase(sortType);
+
+		switch (sortType) {
+			case 'B':
+				SortManager.bubbleSort(shapes, comparator);
+				break;
+
+			case 'I':
+				SortManager.insertionSort(shapes, comparator);
+				break;
+
+			case 'S':
+				SortManager.selectionSort(shapes, comparator);
+				break;
+
+			case 'M':
+				SortManager.mergeSort(shapes, comparator);
+
+				break;
+
+			case 'Q':
+				SortManager.quickSort(shapes, comparator);
+				break;
+			/*
+			 * case 'H':
+			 * SortManager.heapSort(shapes, comparator);//TODO : implement heap sort
+			 * break;
+			 */
+			default:
+				break;
 		}
-		else if(compareType == 'a' || compareType == 'A') {
-			if(sortType == 'b' || sortType == 'B') {
-				BaseAreaCompare bac = new BaseAreaCompare();
-				SortManager.bubbleSort(shapes, bac);
-			}
-			else if(sortType == 'i' || sortType == 'I') {
-				BaseAreaCompare bac = new BaseAreaCompare();
-				SortManager.insertionSort(shapes, bac);
-			}
-			else if(sortType == 's' || sortType == 'S') {
-				BaseAreaCompare bac = new BaseAreaCompare();
-				SortManager.selectionSort(shapes, bac);
-			}
-			else if(sortType == 'm' || sortType == 'm') {
-				BaseAreaCompare bac = new BaseAreaCompare();
-				SortManager.mergeSort(shapes, bac);
-			}
-			else if(sortType == 'q' || sortType == 'Q') {
-				BaseAreaCompare bac = new BaseAreaCompare();
-				SortManager.quickSort(shapes, bac);
-			}
-			else if(sortType == 'h' || sortType == 'H') {
-				BaseAreaCompare bac = new BaseAreaCompare();
-				SortManager.heapSort(shapes, bac);
-			}
-		}
-		else if(compareType == 'v' || compareType == 'V') {
-			if(sortType == 'b' || sortType == 'B') {
-				VolumeCompare vc = new VolumeCompare();
-				SortManager.bubbleSort(shapes, vc);
-			}
-			else if(sortType == 'i' || sortType == 'I') {
-				VolumeCompare vc = new VolumeCompare();
-				SortManager.insertionSort(shapes, vc);
-			}
-			else if(sortType == 's' || sortType == 'S') {
-				VolumeCompare vc = new VolumeCompare();
-				SortManager.selectionSort(shapes, vc);
-			}
-			else if(sortType == 'm' || sortType == 'm') {
-				VolumeCompare vc = new VolumeCompare();
-				SortManager.mergeSort(shapes, vc);
-			}
-			else if(sortType == 'q' || sortType == 'Q') {
-				VolumeCompare vc = new VolumeCompare();
-				SortManager.quickSort(shapes, vc);
-			}
-			else if(sortType == 'h' || sortType == 'H') {
-				VolumeCompare vc = new VolumeCompare();
-				SortManager.heapSort(shapes, vc);
-			}
-		}		
+
+		SortManager.printResult(shapes, compareType);
+
+
 	}
-	
+
 	/**
 	 * loads shapes into shapes array
 	 */
 
 	private void loadShapesFromFile(String file) {
-		File loadFile = new File("res/"+file);
-
+		File loadFile = new File("res/" + file);
+		Integer shapeNumber = 0;
 		try {
 			newFile = new Scanner(loadFile);
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
-		while(newFile.hasNext()) {
+		while (newFile.hasNext()) {
 			String line = newFile.nextLine();
 			String[] fields = line.split(" ");
-			String shapeID = fields[0].toLowerCase();
-			Shapes s = null;
-			switch(shapeID) {
-			case "cone":
-				s = new Cone(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "cylinder":
-				s = new Cylinder(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "pyramid":
-				s = new Pyramid(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "octagonalprism":
-				s = new OctagonalPrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "pentagonalprism":
-				s = new PentagonalPrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "squareprism":
-				s = new SquarePrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "triangularprism":
-				s = new TriangularPrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "10":
+			String shapeID = fields[0];
+
+			if (shapeID.matches("\\d+")) {
 				destinedLength = Integer.parseInt(shapeID);
-				break;
-			case "1000":
-				destinedLength = Integer.parseInt(shapeID);
-				break;
-			case "1000000":
-				destinedLength = Integer.parseInt(shapeID);
-				break;
-			default:
-				System.out.println("No shape ID found");
-				break;
+				shapes = new Shapes[destinedLength];
+				continue;
 			}
+
+			double field1 = Double.parseDouble(fields[1]);
+			double field2 = Double.parseDouble(fields[2]);
+
+			switch (shapeID) {
+				case "Cone":
+					shapes[shapeNumber] = new Cone(field1, field2);
+					break;
+				case "Cylinder":
+					shapes[shapeNumber] = new Cylinder(field1, field2);
+					break;
+				case "Pyramid":
+					shapes[shapeNumber] = new Pyramid(field1, field2);
+					break;
+				case "OctagonalPrism":
+					shapes[shapeNumber] = new OctagonalPrism(field1, field2);
+					break;
+				case "PentagonalPrism":
+					shapes[shapeNumber] = new PentagonalPrism(field1, field2);
+					break;
+				case "SquarePrism":
+					shapes[shapeNumber] = new SquarePrism(field1, field2);
+					break;
+				case "TriangularPrism":
+					shapes[shapeNumber] = new TriangularPrism(field1, field2);
+					break;
+				default:
+					System.out.println("No shape ID found: [" + shapeID + "]");
+					break;
+			}
+			shapeNumber++;
 		}
-	
+
 	}
-	
+
 }

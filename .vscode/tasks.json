@@ -1,0 +1,20 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build JAR File",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile", "-ExecutionPolicy", "Bypass", "-Command",
+                "javac -d bin -cp src (Get-ChildItem -Path src -Filter *.java -Recurse | ForEach-Object { $_.FullName });",
+                "jar cfe app.jar appDomain.AppDriver -C bin ."
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$javac"]
+        }
+    ]
+}
