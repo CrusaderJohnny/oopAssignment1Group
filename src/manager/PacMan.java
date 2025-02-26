@@ -15,7 +15,9 @@ import shapes.SquarePrism;
 import shapes.TriangularPrism;
 import shapes.VolumeCompare;
 import utilities.SortManager;
-
+/**
+ * Package manager class to handle included arguments to program
+ */
 public class PacMan {
 	
 	//attribute
@@ -59,13 +61,16 @@ public class PacMan {
 	}
 	
 	/**
-	 * Sorts the shapes array
+	 * Sorts array of shapes from passed arguments
+	 * sorts by compare type first
+	 * chooses sorting method based off sort type
 	 */
 
 	private void sortShapesFromFile() {
-		if(compareType == 'h' || compareType == 'H') {
+		switch(Character.toLowerCase(compareType)) {
+		case 'h':
 			if(sortType == 'b' || sortType == 'B') {
-				SortManager.bubbleSort(shapes);
+			SortManager.bubbleSort(shapes);
 			}
 			else if(sortType == 'i' || sortType == 'I') {
 				SortManager.insertionSort(shapes);
@@ -82,11 +87,11 @@ public class PacMan {
 			else if(sortType == 'h' || sortType == 'H') {
 				SortManager.heapSort(shapes);
 			}
-		}
-		else if(compareType == 'a' || compareType == 'A') {
+			break;
+		case 'a':
 			if(sortType == 'b' || sortType == 'B') {
-				BaseAreaCompare bac = new BaseAreaCompare();
-				SortManager.bubbleSort(shapes, bac);
+			BaseAreaCompare bac = new BaseAreaCompare();
+			SortManager.bubbleSort(shapes, bac);
 			}
 			else if(sortType == 'i' || sortType == 'I') {
 				BaseAreaCompare bac = new BaseAreaCompare();
@@ -108,11 +113,11 @@ public class PacMan {
 				BaseAreaCompare bac = new BaseAreaCompare();
 				SortManager.heapSort(shapes, bac);
 			}
-		}
-		else if(compareType == 'v' || compareType == 'V') {
+			break;
+		case 'v':
 			if(sortType == 'b' || sortType == 'B') {
-				VolumeCompare vc = new VolumeCompare();
-				SortManager.bubbleSort(shapes, vc);
+			VolumeCompare vc = new VolumeCompare();
+			SortManager.bubbleSort(shapes, vc);
 			}
 			else if(sortType == 'i' || sortType == 'I') {
 				VolumeCompare vc = new VolumeCompare();
@@ -134,11 +139,18 @@ public class PacMan {
 				VolumeCompare vc = new VolumeCompare();
 				SortManager.heapSort(shapes, vc);
 			}
-		}		
+			break;
+		default:
+			System.out.println("No proper method selected, options are 'h', 'a', and 'v' ");
+		}	
 	}
 	
 	/**
-	 * loads shapes into shapes array
+	 * Takes in file arg and reads from the file specified
+	 * takes first line of file and sets array length to it
+	 * Sorts next lines based on switch case from first field of the line
+	 * creates new shape objects based on switch case
+	 * adds shape object to array at specified index and then increments index by 1
 	 */
 
 	private void loadShapesFromFile(String file) {
