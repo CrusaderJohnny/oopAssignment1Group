@@ -8,31 +8,39 @@ import shapes.Shapes;
 
 public class SortManager {
 
+	// Method to print the results of the sorting
 	public static void printResult(Shapes[] shapes, char compareType) {
 		for (int i = 0; i < shapes.length; i++) {
 			// Determine if we should print this element
 			if (i == 0 || i == shapes.length - 1 || (shapes.length > 1000 && i % 1000 == 0)) {
+				//Label for element based on the position.
 				String label = (i == 0) ? "First element is: "
 						: (i == shapes.length - 1) ? "Last element is: " : String.format("%-7d-th element:", i);
-
+				//Get sorted values 
 				String sortedValues = (compareType == 'h' ? "Height: " + Double.toString(shapes[i].getHeight())
 						: (compareType == 'v' ? "Volume: " + Double.toString(shapes[i].calcVolume())
 								: ("Area: " + Double.toString(shapes[i].calcBaseArea()))));
-
+				//prints the output
 				System.out.printf("%s  %-18s %s%n", label, shapes[i].getClass().getSimpleName(), sortedValues);
 			}
 		}
 	}
 
+	//Bubble soort algorithm
 	public static void bubbleSort(Shapes[] shapes, Comparator<Shapes> comparator) {
+		//starts with the time of sorting and the number of element in an array
 		long start = System.currentTimeMillis();
 		Integer n = shapes.length;
 
+		//Iterate through the array.
 		for (Integer i = 0; i < n - 1; i++) {
 			boolean swapped = false;
 
+			//Inner loop to compare and swap adjacent elements
 			for (Integer j = 0; j < n - i - 1; j++) {
 
+				//If comparator in null use the default
+				//Else use the given
 				if ((comparator == null && shapes[j].compareTo(shapes[j + 1]) < 0)
 						|| (comparator != null && comparator.compare(shapes[j], shapes[j + 1]) > 0)) {
 
@@ -43,6 +51,7 @@ public class SortManager {
 				}
 			}
 
+			//If no swaps were made in the inner loop, the array is sorted
 			if (!swapped)
 				break;
 		}
@@ -52,7 +61,9 @@ public class SortManager {
 				+ (end - start) + " millis");
 	}
 
+	//Insertion sort algorithm
 	public static void insertionSort(Shapes[] shapes, Comparator<Shapes> comparator) {
+		//starts with the time of sorting and the number of element in an array
 		long start = System.currentTimeMillis();
 		int n = shapes.length;
 
@@ -61,9 +72,12 @@ public class SortManager {
 
 			int j = i - 1;
 
+			//prints the progress if more the 10000 elements are sorted
 			if (i % 10000 == 0) {
 				System.out.println(i + " elements sorted, time: " + (System.currentTimeMillis() - start) + " ms");
 			}
+
+			//Elements greater than the key are moved one position ahead.
 			while (j >= 0 && ((comparator == null && shapes[j].compareTo(key) < 0)
 					|| (comparator != null && comparator.compare(shapes[j], key) > 0))) {
 				shapes[j + 1] = shapes[j];
@@ -78,20 +92,26 @@ public class SortManager {
 				+ (end - start) + " ms");
 	}
 
+	//Selection sort algorithm
 	public static void selectionSort(Shapes[] shapes, Comparator<Shapes> comparator) {
+		//starts with the time of sorting and the number of element in an array
 		long start = System.currentTimeMillis();
 		int n = shapes.length;
 
+		//outer loop assuming the current index as the minimum index
 		for (int i = 0; i < n - 1; i++) {
 			int minIndex = i;
 
+			//inner loop to find the minimum element in the unsorted part of the array
 			for (int j = i + 1; j < n; j++) {
 				if ((comparator == null && shapes[j].compareTo(shapes[minIndex]) > 0)
 						|| (comparator != null && comparator.compare(shapes[j], shapes[minIndex]) < 0)) {
+					//Updates if any smaller element is found.
 					minIndex = j;
 				}
 			}
 
+			//Swaps the minimum element with the first element in an unsorted array
 			Shapes temp = shapes[minIndex];
 			shapes[minIndex] = shapes[i];
 			shapes[i] = temp;
@@ -103,6 +123,7 @@ public class SortManager {
 				+ (end - start) + " ms");
 	}
 
+	//Merge sort algorithm
 	public static void mergeSort(Shapes[] shapes, Comparator<Shapes> comparator) {
 		long start = System.currentTimeMillis();
 		mergeSortRecursive(shapes, 0, shapes.length - 1, comparator);
@@ -111,6 +132,7 @@ public class SortManager {
 				"-------------------------------------------------Time taken by Merge Sort: " + (end - start) + " ms");
 	}
 
+	//Recursive helper method
 	private static void mergeSortRecursive(Shapes[] shapes, int left, int right, Comparator<Shapes> comparator) {
 		if (left < right) {
 			int mid = left + (right - left) / 2;
@@ -124,6 +146,7 @@ public class SortManager {
 		}
 	}
 
+	//merge two sorted arrays in one.
 	private static void merge(Shapes[] shapes, int left, int mid, int right, Comparator<Shapes> comparator) {
 		int n1 = mid - left + 1;
 		int n2 = right - mid;
@@ -166,6 +189,7 @@ public class SortManager {
 		}
 	}
 
+	//Quick sort algorithm.
 	public static void quickSort(Shapes[] shapes, Comparator<Shapes> comparator) {
 		long start = System.currentTimeMillis();
 
@@ -176,15 +200,18 @@ public class SortManager {
 				"-------------------------------------------------Time taken by Quick Sort: " + (end - start) + " ms");
 	}
 
+	//helper method for quick sort
 	private static void quickSortHelper(Shapes[] shapes, int low, int high, Comparator<Shapes> comparator) {
 		if (low < high) {
 			int pivotIndex = randomizedPartition(shapes, low, high, comparator);
 
+			//sorts the subarrays recursively.
 			quickSortHelper(shapes, low, pivotIndex - 1, comparator);
 			quickSortHelper(shapes, pivotIndex + 1, high, comparator);
 		}
 	}
 
+	//partition method for quick sort
 	private static int randomizedPartition(Shapes[] shapes, int low, int high, Comparator<Shapes> comparator) {
 		Random rand = new Random();
 		int randomPivotIndex = low + rand.nextInt(high - low + 1);
@@ -193,10 +220,12 @@ public class SortManager {
 		return partition(shapes, low, high, comparator);
 	}
 
+	//partition logic
 	private static int partition(Shapes[] shapes, int low, int high, Comparator<Shapes> comparator) {
 		Shapes pivot = shapes[high];
 		int i = low - 1;
 
+		//loops through and swaps the elements that are smaller than the pivot.
 		for (int j = low; j < high; j++) {
 			if ((comparator == null && shapes[j].compareTo(pivot) >= 0)
 					|| (comparator != null && comparator.compare(shapes[j], pivot) <= 0)) {
@@ -205,19 +234,23 @@ public class SortManager {
 			}
 		}
 
+		//swaps the pivot back in its correct position.
 		swap(shapes, i + 1, high);
 		return i + 1;
 	}
 
+	//swaps elements in the shapes array.
 	private static void swap(Shapes[] shapes, int i, int j) {
 		Shapes temp = shapes[i];
 		shapes[i] = shapes[j];
 		shapes[j] = temp;
 	}
 
+	//timSort (A built-in java sorting algorithm).
 	public static void timSort(Shapes[] shapes, Comparator<Shapes> comparator) {
 		long start = System.currentTimeMillis();
 
+		//performs the sort with reversed comparator.
 		Arrays.sort(shapes, comparator.reversed());
 
 		long end = System.currentTimeMillis();
