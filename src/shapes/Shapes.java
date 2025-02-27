@@ -27,10 +27,10 @@ public abstract class Shapes implements Comparable<Shapes> {
 	@Override
 	public int compareTo(Shapes o) {
 		if(this.height > o.height) {
-			return 1;
+			return -1;
 		}
 		if(this.height < o.height) {
-			return -1;
+			return 1;
 		}
 		return 0;
 	}

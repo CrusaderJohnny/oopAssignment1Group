@@ -56,9 +56,47 @@ public class PacMan {
 		sortShapesFromFile();
 		long stop = System.currentTimeMillis();
 		long timeElapsed = stop - start;
-		System.out.println(timeElapsed);
-		
-	}
+		displaySortedResults(timeElapsed,sortType);
+
+    }
+	
+	/**
+	 * Displays First, Last, and every thousandth element in the array
+	 * Takes two passed parameters of timeElapsed and sortType
+	 * @param timeElapsed Passed parameter of the difference between start and stop time in milliseconds
+	 * @param sortType Passed parameter of chosen sorting method
+	 */
+    private void displaySortedResults(long timeElapsed,char sortType) {
+
+        String sortName = null ;
+        switch(Character.toLowerCase(sortType)) {
+        case'b':
+            sortName = "Bubble sort";
+            break;
+        case'i':
+            sortName = "Insertion sort";
+            break;
+        case's':
+            sortName = "Selection sort";
+            break;
+        case'm':
+            sortName = "Merge sort";
+            break;
+        case'q':
+            sortName = "Quick sort";
+            break;
+        case'h':
+            sortName = "Heap sort";
+            break;
+        }
+        System.out.println("First Element : " +shapes[0]);
+        for (int i = 1000;i <= shapes.length;i += 1000) {
+            System.out.println(i+ "th Element : " +shapes[i-1]);
+        }
+        System.out.println("last Element : " +shapes[shapes.length-1]);
+
+        System.out.println(sortName +" run time :"+timeElapsed+" milliseconds");
+    }
 	
 	/**
 	 * Sorts array of shapes from passed arguments
@@ -69,80 +107,86 @@ public class PacMan {
 	private void sortShapesFromFile() {
 		switch(Character.toLowerCase(compareType)) {
 		case 'h':
-			if(sortType == 'b' || sortType == 'B') {
-			SortManager.bubbleSort(shapes);
-			}
-			else if(sortType == 'i' || sortType == 'I') {
-				SortManager.insertionSort(shapes);
-			}
-			else if(sortType == 's' || sortType == 'S') {
-				SortManager.selectionSort(shapes);
-			}
-			else if(sortType == 'm' || sortType == 'm') {
-				SortManager.mergeSort(shapes);
-			}
-			else if(sortType == 'q' || sortType == 'Q') {
-				SortManager.quickSort(shapes);
-			}
-			else if(sortType == 'h' || sortType == 'H') {
-				SortManager.heapSort(shapes);
-			}
+			switch(Character.toUpperCase(sortType)) {
+				case 'B':
+					SortManager.bubbleSort(shapes);
+					break;
+				case 'I':
+					SortManager.insertionSort(shapes);
+					break;
+				case 'S':
+					SortManager.selectionSort(shapes);
+					break;
+				case 'M':
+					SortManager.mergeSort(shapes);
+					break;
+				case 'Q':
+					SortManager.quickSort(shapes);
+					break;
+				case 'H':
+					SortManager.heapSort(shapes);
+					break;
+				default:
+					System.out.println("Incorrect sort method chosen, options are 'b', 'i', 's', 'm', 'q', and 'h' ");
+					break;
+				}
 			break;
 		case 'a':
-			if(sortType == 'b' || sortType == 'B') {
 			BaseAreaCompare bac = new BaseAreaCompare();
-			SortManager.bubbleSort(shapes, bac);
-			}
-			else if(sortType == 'i' || sortType == 'I') {
-				BaseAreaCompare bac = new BaseAreaCompare();
-				SortManager.insertionSort(shapes, bac);
-			}
-			else if(sortType == 's' || sortType == 'S') {
-				BaseAreaCompare bac = new BaseAreaCompare();
-				SortManager.selectionSort(shapes, bac);
-			}
-			else if(sortType == 'm' || sortType == 'm') {
-				BaseAreaCompare bac = new BaseAreaCompare();
-				SortManager.mergeSort(shapes, bac);
-			}
-			else if(sortType == 'q' || sortType == 'Q') {
-				BaseAreaCompare bac = new BaseAreaCompare();
-				SortManager.quickSort(shapes, bac);
-			}
-			else if(sortType == 'h' || sortType == 'H') {
-				BaseAreaCompare bac = new BaseAreaCompare();
-				SortManager.heapSort(shapes, bac);
+			switch(Character.toUpperCase(sortType)) {
+				case 'B':
+					SortManager.bubbleSort(shapes, bac);
+					break;
+				case 'I':
+					SortManager.insertionSort(shapes, bac);
+					break;
+				case 'S':
+					SortManager.selectionSort(shapes, bac);
+					break;
+				case 'M':
+					SortManager.mergeSort(shapes, bac);
+					break;
+				case 'Q':
+					SortManager.quickSort(shapes, bac);
+					break;
+				case 'H':
+					SortManager.heapSort(shapes, bac);
+					break;
+				default:
+					System.out.println("Incorrect sort method chosen, options are 'b', 'i', 's', 'm', 'q', and 'h' ");
+					break;
 			}
 			break;
 		case 'v':
-			if(sortType == 'b' || sortType == 'B') {
 			VolumeCompare vc = new VolumeCompare();
-			SortManager.bubbleSort(shapes, vc);
-			}
-			else if(sortType == 'i' || sortType == 'I') {
-				VolumeCompare vc = new VolumeCompare();
-				SortManager.insertionSort(shapes, vc);
-			}
-			else if(sortType == 's' || sortType == 'S') {
-				VolumeCompare vc = new VolumeCompare();
-				SortManager.selectionSort(shapes, vc);
-			}
-			else if(sortType == 'm' || sortType == 'm') {
-				VolumeCompare vc = new VolumeCompare();
-				SortManager.mergeSort(shapes, vc);
-			}
-			else if(sortType == 'q' || sortType == 'Q') {
-				VolumeCompare vc = new VolumeCompare();
-				SortManager.quickSort(shapes, vc);
-			}
-			else if(sortType == 'h' || sortType == 'H') {
-				VolumeCompare vc = new VolumeCompare();
-				SortManager.heapSort(shapes, vc);
+			switch(Character.toUpperCase(sortType)) {
+				case 'B':
+					SortManager.bubbleSort(shapes, vc);
+					break;
+				case 'I':
+					SortManager.insertionSort(shapes, vc);
+					break;
+				case 'S':
+					SortManager.selectionSort(shapes, vc);
+					break;
+				case 'M':
+					SortManager.mergeSort(shapes, vc);
+					break;
+				case 'Q':
+					SortManager.quickSort(shapes, vc);
+					break;
+				case 'H':
+					SortManager.heapSort(shapes, vc);
+					break;
+				default:
+					System.out.println("Incorrect sort method chosen, options are 'b', 'i', 's', 'm', 'q', and 'h' ");
+					break;
 			}
 			break;
 		default:
 			System.out.println("No proper method selected, options are 'h', 'a', and 'v' ");
-		}	
+			break;
+		}
 	}
 	
 	/**
