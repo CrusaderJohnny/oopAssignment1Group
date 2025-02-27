@@ -198,7 +198,32 @@ public class PacMan {
 	 */
 
 	private void loadShapesFromFile(String file) {
-		File loadFile = new File("res/"+file);
+		String fileLoc = null;
+		switch(file) {
+		case "shapes1.txt":
+			fileLoc = "res/"+file;
+			break;
+		case "shapes2.txt":
+			fileLoc = "res/"+file;
+			break;
+		case "shapes3.txt":
+			fileLoc = "res/"+file;
+			break;
+		case "res/shapes1.txt":
+			fileLoc = file;
+			break;
+		case "res/shapes2.txt":
+			fileLoc = file;
+			break;
+		case "res/shapes3.txt":
+			fileLoc = file;
+			break;
+		default:
+			fileLoc = file;
+			break;
+		}
+		
+		File loadFile = new File(fileLoc);
 		int index = 0;
 
 		try {
@@ -206,42 +231,46 @@ public class PacMan {
 		} catch (FileNotFoundException e) {
 			System.out.println(e.getMessage());
 		}
-		String length = newFile.nextLine();
-		destinedLength = Integer.parseInt(length);
-		shapes = new Shapes[destinedLength];
-		while(newFile.hasNext()) {
-			String line = newFile.nextLine();
-			String[] fields = line.split(" ");
-			String shapeID = fields[0].toLowerCase();
-			Shapes s = null;
-			switch(shapeID) {
-			case "cone":
-				s = new Cone(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "cylinder":
-				s = new Cylinder(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "pyramid":
-				s = new Pyramid(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "octagonalprism":
-				s = new OctagonalPrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "pentagonalprism":
-				s = new PentagonalPrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "squareprism":
-				s = new SquarePrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			case "triangularprism":
-				s = new TriangularPrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
-				break;
-			default:
-				System.out.println("No shape ID found");
-				break;
+		if(newFile == null) {
+			System.out.println("File not found");
+		} else {
+			String length = newFile.nextLine();
+			destinedLength = Integer.parseInt(length);
+			shapes = new Shapes[destinedLength];
+			while(newFile.hasNext()) {
+				String line = newFile.nextLine();
+				String[] fields = line.split(" ");
+				String shapeID = fields[0].toLowerCase();
+				Shapes s = null;
+				switch(shapeID) {
+				case "cone":
+					s = new Cone(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
+					break;
+				case "cylinder":
+					s = new Cylinder(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
+					break;
+				case "pyramid":
+					s = new Pyramid(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
+					break;
+				case "octagonalprism":
+					s = new OctagonalPrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
+					break;
+				case "pentagonalprism":
+					s = new PentagonalPrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
+					break;
+				case "squareprism":
+					s = new SquarePrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
+					break;
+				case "triangularprism":
+					s = new TriangularPrism(Double.parseDouble(fields[1]), Double.parseDouble(fields[2]));
+					break;
+				default:
+					System.out.println("No shape ID found");
+					break;
+				}
+				shapes[index] = s;
+				index++;
 			}
-			shapes[index] = s;
-			index++;
-		}	
+		}
 	}	
 }
