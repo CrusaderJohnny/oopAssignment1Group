@@ -1,7 +1,6 @@
 package manager;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 import shapes.BaseAreaCompare;
@@ -25,8 +24,6 @@ public class PacMan {
 	private char compareType;
 	private char sortType;
 	private Shapes[] shapes;
-	private Scanner input;
-	private File file;
 	private	Scanner newFile;
 	private int destinedLength;
 	
@@ -190,7 +187,7 @@ public class PacMan {
 	}
 	
 	/**
-	 * Takes in file arg and reads from the file specified
+	 * Takes in file arg and assigns the file location based on a switch case
 	 * takes first line of file and sets array length to it
 	 * Sorts next lines based on switch case from first field of the line
 	 * creates new shape objects based on switch case
@@ -199,7 +196,7 @@ public class PacMan {
 
 	private void loadShapesFromFile(String file) {
 		String fileLoc = null;
-		switch(file) {
+		switch(file.toLowerCase()) {
 		case "shapes1.txt":
 			fileLoc = "res/"+file;
 			break;
