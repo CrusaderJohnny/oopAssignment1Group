@@ -23,7 +23,7 @@ public class OctagonalPrism extends Prisms
 	@Override
 	public String toString() {
 		return "Octagonal Prism with height: " + getHeight() + "\nSides: " 
-				+getSide() + "\nHas a base area: " +String.format("%.2f", calcBaseArea())+
-				"\nVolume: " +String.format("%.2f", calcVolume())+ "\n";
+				+getSide() + "\nHas a base area: " +String.format("%.5f", calcBaseArea())+
+				"\nVolume: " +String.format("%.5f", calcVolume())+ "\n";
 	}
 }

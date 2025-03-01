@@ -1,8 +1,8 @@
 package manager;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.Scanner;
-
 import shapes.BaseAreaCompare;
 import shapes.Cone;
 import shapes.Cylinder;
@@ -14,6 +14,7 @@ import shapes.SquarePrism;
 import shapes.TriangularPrism;
 import shapes.VolumeCompare;
 import utilities.SortManager;
+
 /**
  * Package manager class to handle included arguments to program
  */
@@ -34,7 +35,6 @@ public class PacMan {
 
 	public PacMan(String[] args) {
 		for(String s : args) {
-			System.out.println(s);
 			if(s.startsWith("-f") || s.startsWith("-F")) {
 				fileName = s.substring(2);
 			}
@@ -45,16 +45,18 @@ public class PacMan {
 				sortType = s.substring(2).charAt(0);
 			}
 		}
-		System.out.println(fileName);
-		System.out.println(compareType);
-		System.out.println(sortType);
-		loadShapesFromFile(fileName);
+		try {
+			loadShapesFromFile(fileName);
+		} catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+
 		long start = System.currentTimeMillis();
 		sortShapesFromFile();
 		long stop = System.currentTimeMillis();
 		long timeElapsed = stop - start;
 		displaySortedResults(timeElapsed,sortType);
-
+		
     }
 	
 	/**

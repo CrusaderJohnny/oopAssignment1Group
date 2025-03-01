@@ -41,8 +41,8 @@ public class Cone extends Shapes
 	@Override
 	public String toString() {
 		return "Cone height: " + getHeight() + "\nCone radius: " + rads + 
-				"\nBase Area: "+ String.format("%.2f", calcBaseArea()) + 
-				"\nVolume: " +String.format("%.2f", calcVolume())+ "\n";
+				"\nBase Area: "+ String.format("%.5f", calcBaseArea()) + 
+				"\nVolume: " +String.format("%.5f", calcVolume())+ "\n";
 	}
 	
 	

@@ -35,8 +35,8 @@ public class Pyramid extends Shapes
 	@Override
 	public String toString() {
 		return "Pyramid height: " + getHeight() + "\nPyramid side: " + side + 
-				"\nBase Area: "+ String.format("%.2f", calcBaseArea()) + 
-				"\nVolume: " +String.format("%.2f", calcVolume())+ "\n";
+				"\nBase Area: "+ String.format("%.5f", calcBaseArea()) + 
+				"\nVolume: " +String.format("%.5f", calcVolume())+ "\n";
 	}
 
 }

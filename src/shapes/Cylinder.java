@@ -40,8 +40,9 @@ public class Cylinder extends Shapes
 	}
 	@Override
 	public String toString() {
-		return "Cylinder height: " + getHeight() + "\nCylinder radius: " + rads + "\nBase Area: "+ String.format("%.2f", calcBaseArea()) + 
-				"\nVolume: " +String.format("%.2f", calcVolume())+ "\n";
+		return "Cylinder height: " + getHeight() + "\nCylinder radius: " + rads + 
+				"\nBase Area: "+ String.format("%.5f", calcBaseArea()) + 
+				"\nVolume: " +String.format("%.5f", calcVolume())+ "\n";
 	}
 
 }
