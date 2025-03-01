@@ -1,33 +1,62 @@
 {
     "version": "0.2.0",
     "configurations": [
+       
         {
             "type": "java",
             "request": "launch",
-            "name": "Run AppDriver (No Args)",
+            "name": "Debug Java Program with Args B",
             "mainClass": "appDomain.AppDriver",
-            "projectName": "assignment1StartingCode",
-            "preLaunchTask": "Build JAR File"
-        },
-        {
-            "type": "java",
-            "request": "launch",
-            "name": "Build Jar",
-            "mainClass": "appDomain.AppDriver",  
             "args": "-fshapes1.txt -th -sb",
             "cwd": "${workspaceFolder}",
-            "preLaunchTask": "Build JAR File"
+            "console": "integratedTerminal",
         },
         {
             "type": "java",
             "request": "launch",
-            "name": "Debug Java Program with Args",
+            "name": "Debug Java Program with Args I",
             "mainClass": "appDomain.AppDriver",
-            "args": "-fshapes3.txt -th -sq",
+            "args": "-fshapes1.txt -th -si",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+        },
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "Debug Java Program with Args S",
+            "mainClass": "appDomain.AppDriver",
+            "args": "-fshapes1.txt -th -ss",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+        },
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "Debug Java Program with Args M",
+            "mainClass": "appDomain.AppDriver",
+            "args": "-fshapes1.txt -th -sm",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+        },
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "Debug Java Program with Args Q",
+            "mainClass": "appDomain.AppDriver",
+            "args": "-fshapes1.txt -th -sq",
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+        },
+        {
+            "type": "java",
+            "request": "launch",
+            "name": "Debug Java Program with Args H",
+            "mainClass": "appDomain.AppDriver",
+            "args": "-fshapes1.txt -th -sh",
             "cwd": "${workspaceFolder}",
             "console": "integratedTerminal",
         }
     ]
 }
 //-t H V A
-//-s B I S M Q 
+//-s B I S M Q  H

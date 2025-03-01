@@ -1,6 +1,5 @@
 package utilities;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Random;
 
@@ -29,7 +28,6 @@ public class SortManager {
 	//Bubble soort algorithm
 	public static void bubbleSort(Shapes[] shapes, Comparator<Shapes> comparator) {
 		//starts with the time of sorting and the number of element in an array
-		long start = System.currentTimeMillis();
 		Integer n = shapes.length;
 
 		//Iterate through the array.
@@ -56,26 +54,18 @@ public class SortManager {
 				break;
 		}
 
-		long end = System.currentTimeMillis();
-		System.out.println("-------------------------------------------------Time taken by Bubble sort is "
-				+ (end - start) + " millis");
+	
 	}
 
 	//Insertion sort algorithm
 	public static void insertionSort(Shapes[] shapes, Comparator<Shapes> comparator) {
 		//starts with the time of sorting and the number of element in an array
-		long start = System.currentTimeMillis();
 		int n = shapes.length;
 
 		for (int i = 1; i < n; i++) {
 			Shapes key = shapes[i];
 
 			int j = i - 1;
-
-			//prints the progress if more the 10000 elements are sorted
-			if (i % 10000 == 0) {
-				System.out.println(i + " elements sorted, time: " + (System.currentTimeMillis() - start) + " ms");
-			}
 
 			//Elements greater than the key are moved one position ahead.
 			while (j >= 0 && ((comparator == null && shapes[j].compareTo(key) < 0)
@@ -87,15 +77,11 @@ public class SortManager {
 
 		}
 
-		long end = System.currentTimeMillis();
-		System.out.println("-------------------------------------------------Time taken by Insertion Sort: "
-				+ (end - start) + " ms");
 	}
 
 	//Selection sort algorithm
 	public static void selectionSort(Shapes[] shapes, Comparator<Shapes> comparator) {
 		//starts with the time of sorting and the number of element in an array
-		long start = System.currentTimeMillis();
 		int n = shapes.length;
 
 		//outer loop assuming the current index as the minimum index
@@ -118,18 +104,13 @@ public class SortManager {
 
 		}
 
-		long end = System.currentTimeMillis();
-		System.out.println("-------------------------------------------------Time taken by Selection Sort: "
-				+ (end - start) + " ms");
+		
 	}
 
 	//Merge sort algorithm
 	public static void mergeSort(Shapes[] shapes, Comparator<Shapes> comparator) {
-		long start = System.currentTimeMillis();
 		mergeSortRecursive(shapes, 0, shapes.length - 1, comparator);
-		long end = System.currentTimeMillis();
-		System.out.println(
-				"-------------------------------------------------Time taken by Merge Sort: " + (end - start) + " ms");
+		
 	}
 
 	//Recursive helper method
@@ -191,13 +172,10 @@ public class SortManager {
 
 	//Quick sort algorithm.
 	public static void quickSort(Shapes[] shapes, Comparator<Shapes> comparator) {
-		long start = System.currentTimeMillis();
 
 		quickSortHelper(shapes, 0, shapes.length - 1, comparator);
 
-		long end = System.currentTimeMillis();
-		System.out.println(
-				"-------------------------------------------------Time taken by Quick Sort: " + (end - start) + " ms");
+		
 	}
 
 	//helper method for quick sort
@@ -246,14 +224,56 @@ public class SortManager {
 		shapes[j] = temp;
 	}
 
-	//timSort (A built-in java sorting algorithm).
-	public static void timSort(Shapes[] shapes, Comparator<Shapes> comparator) {
-		long start = System.currentTimeMillis();
+	
+	/**
+	 * Heap sort method taking an array of objects and a comparator
+	 * @param arr Array of objects
+	 * @param c Passed comparator method
+	 */
+	public static void heapSort(Shapes[] shapes, Comparator<Shapes> comparator) {
+	    int n = shapes.length;
 
-		//performs the sort with reversed comparator.
-		Arrays.sort(shapes, comparator.reversed());
+	    // Build max heap
+	    for (int i = n / 2 - 1; i >= 0; i--) {
+	        heapify(shapes, n, i, comparator);
+	    }
 
-		long end = System.currentTimeMillis();
-		System.out.println("Time taken by TimSort (Arrays.sort()): " + (end - start) + " ms");
+	    // Extract elements one by one
+	    for (int i = n - 1; i > 0; i--) {
+	        swap(shapes, 0, i);
+	        heapify(shapes, i, 0, comparator);
+	    }
+	}
+
+    /**
+     * Heapifies a subtree rooted with node i which is an index in arr[]. n is size of heap.
+     *
+     * @param arr        The array to be heapified.
+     * @param n          Size of the heap.
+     * @param i          Index of the root of the subtree.
+     * @param comparator The comparator to use for sorting.
+     */
+	private static void heapify(Shapes[] shapes, int n, int i, Comparator<Shapes> comparator) {
+		int largest = i;
+		int l = 2 * i + 1; // Left child
+		int r = 2 * i + 2; // Right child
+	
+		// Compare left child
+		if (l < n && ((comparator == null && shapes[l].compareTo(shapes[largest]) < 0) ||
+					  (comparator != null && comparator.compare(shapes[l], shapes[largest]) > 0))) {
+			largest = l;
+		}
+	
+		// Compare right child
+		if (r < n && ((comparator == null && shapes[r].compareTo(shapes[largest]) < 0) ||
+					  (comparator != null && comparator.compare(shapes[r], shapes[largest]) > 0))) {
+			largest = r;
+		}
+	
+		// Swap and recursively heapify if needed
+		if (largest != i) {
+			swap(shapes, i, largest);
+			heapify(shapes, n, largest, comparator);
+		}
 	}
 }
